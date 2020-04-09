@@ -21,7 +21,7 @@ class WizStockBarcodesRead(models.AbstractModel):
     def process_lot(self, barcode_decoded):
         lot_barcode = barcode_decoded.get("10", False)
         lot = self.env["stock.production.lot"].search(
-            [("name", "=", lot_barcode), ("product_id", "=", self.product_id.id),]
+            [("name", "=", lot_barcode), ("product_id", "=", self.product_id.id)]
         )
         if not lot:
             lot = self._create_lot(barcode_decoded)

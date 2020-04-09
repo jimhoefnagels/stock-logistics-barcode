@@ -20,7 +20,7 @@ class TestStockBarcodesGS1(TestStockBarcodes):
         )
 
         self.product_wo_tracking_gs1 = self.product_wo_tracking.copy(
-            {"barcode": "07010001234567",}
+            {"barcode": "07010001234567"}
         )
         self.product_tracking_gs1 = self.product_tracking.copy()
         self.packaging_gs1 = self.ProductPackaging.create(
@@ -43,9 +43,7 @@ class TestStockBarcodesGS1(TestStockBarcodes):
             "(Barcode for product packaging not found)",
         )
         # Scan packaging barcode with more than one package
-        self.packaging_gs1.copy(
-            {"barcode": "19501101530000",}
-        )
+        self.packaging_gs1.copy({"barcode": "19501101530000"})
         self.action_barcode_scanned(self.wiz_scan, self.gs1_barcode_01)
         self.assertEqual(
             self.wiz_scan.message,
@@ -67,7 +65,7 @@ class TestStockBarcodesGS1(TestStockBarcodes):
     def test_wizard_scan_gs1_lot(self):
         self.packaging_gs1.product_id = self.product_tracking_gs1
         lot = self.StockProductionLot.create(
-            {"name": "AB-123", "product_id": self.product_tracking_gs1.id,}
+            {"name": "AB-123", "product_id": self.product_tracking_gs1.id}
         )
         self.action_barcode_scanned(self.wiz_scan, self.gs1_barcode_01)
         self.assertEqual(self.wiz_scan.lot_id, lot)
